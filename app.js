@@ -8,7 +8,7 @@ function fruit(item){
     console.log("fruit name is " + item)
 }
 
-fruit("Bana");
+fruit("Banan");
 
 var a =10;
 var b = 20;
