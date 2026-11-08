@@ -22,6 +22,7 @@
 
 const http = require("http");
 const fs = require("fs");
+const querystring = require('querystring');
 
 http
   .createServer((req, resp) => {
@@ -36,6 +37,16 @@ http
       if (req.url == "/") {
         resp.write(data);
       } else if (req.url == "/submit") {
+
+        let dataBody=[];
+        req.on('data',(chunk)=>{
+            dataBody.push(chunk)
+        });
+        req.on('end', ()=>{
+            let rawData = Buffer.concat(dataBody).toString();
+            let readableData = querystring.parse(rawData);
+            console.log(readableData)
+        })
         resp.write("<h1>form submitted</h1>");
       }
       resp.end();
